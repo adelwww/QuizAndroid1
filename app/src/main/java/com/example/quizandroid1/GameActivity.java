@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (thirdAnswer.getText() == answer){
-                    Toast.makeText(GameActivity.this, "Верно!" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Верно!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(GameActivity.this, "Не верно", Toast.LENGTH_SHORT).show();
