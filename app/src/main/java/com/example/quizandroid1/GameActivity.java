@@ -13,7 +13,10 @@ public class GameActivity extends AppCompatActivity {
     TextView currentLevelTv, questionTv, tvAnswerQuiz;
     GameModel gameModel;
     private String answer;
-
+    private String firstVariant;
+    private String secondVariant;
+    private String thirdVariant;
+    private String fourVariant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,6 @@ public class GameActivity extends AppCompatActivity {
         setQuestion();
         click();
     }
-
 
     private void initViews() {
         currentLevelTv = findViewById(R.id.level_tv);
@@ -44,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
             firstAnswer.setText(gameModel.getFirstVariant());
             secondAnswer.setText(gameModel.getSecondVariant());
             thirdAnswer.setText(gameModel.getThirdVariant());
-            fourthAnswer.setText(gameModel.getFourthVariant());
+            fourthAnswer.setText(gameModel.getFourVariant());
             tvAnswerQuiz.setText(gameModel.getAnswer());
         }
     }
@@ -52,8 +54,8 @@ public class GameActivity extends AppCompatActivity {
         firstAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answer.equals(gameModel.getAnswer())){
-                    Toast.makeText(GameActivity.this, "Верно: " + answer, Toast.LENGTH_SHORT).show();
+                if (firstAnswer.getText() == answer){
+                    Toast.makeText(GameActivity.this, "Верно!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(GameActivity.this, "Не верно", Toast.LENGTH_SHORT).show();
@@ -64,8 +66,8 @@ public class GameActivity extends AppCompatActivity {
         secondAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answer.equals(gameModel.getAnswer())){
-                    Toast.makeText(GameActivity.this, "Верно: " + answer, Toast.LENGTH_SHORT).show();
+                if (secondAnswer.getText() == answer){
+                    Toast.makeText(GameActivity.this, "Верно!" , Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(GameActivity.this, "Не верно", Toast.LENGTH_SHORT).show();
@@ -75,8 +77,8 @@ public class GameActivity extends AppCompatActivity {
         thirdAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answer.equals(gameModel.getAnswer())){
-                    Toast.makeText(GameActivity.this, "Верно: " + answer, Toast.LENGTH_SHORT).show();
+                if (thirdAnswer.getText() == answer){
+                    Toast.makeText(GameActivity.this, "Верно!" , Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(GameActivity.this, "Не верно", Toast.LENGTH_SHORT).show();
@@ -86,8 +88,8 @@ public class GameActivity extends AppCompatActivity {
         fourthAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answer.equals(gameModel.getAnswer())){
-                    Toast.makeText(GameActivity.this, "Верно: " + answer, Toast.LENGTH_SHORT).show();
+                if (fourthAnswer.getText() == answer){
+                    Toast.makeText(GameActivity.this, "Верно!" , Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(GameActivity.this, "Не верно", Toast.LENGTH_SHORT).show();

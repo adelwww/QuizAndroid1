@@ -1,80 +1,42 @@
 package com.example.quizandroid1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.quizandroid1.adapter.QuizAdapter;
+import com.example.quizandroid1.interf.ItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class LevelActivity extends AppCompatActivity {
+    List<GameModel> list = new ArrayList<>();
+    RecyclerView recyclerView;
+    QuizAdapter quizAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
-        findViewById(R.id.first_level).setOnClickListener(new View.OnClickListener() {
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        list = QuizClient.getQuiz();
+        quizAdapter = new QuizAdapter(list);
+        recyclerView.setAdapter(quizAdapter);
+        quizAdapter.setItemClickListener(new ItemClickListener() {
             @Override
-            public void onClick(View view) {
-                GameModel gameModel = new GameModel();
-                gameModel.setCurrentLevel("Level 1");
-                gameModel.setQuestion("В каком году была изобретена зубная щетка?");
-                gameModel.setFirstVariant("1938");
-                gameModel.setSecondVariant("1954");
-                gameModel.setThirdVariant("1947");
-                gameModel.setFourthVariant("1976");
-                gameModel.setAnswer("1938");
+            public void itemClick(int position, GameModel gameModel) {
                 Intent intent = new Intent(LevelActivity.this,GameActivity.class);
-                intent.putExtra("KEY", gameModel);
-                startActivity(intent);
-            }
-        });
-        findViewById(R.id.second_level).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameModel gameModel = new GameModel();
-                gameModel.setCurrentLevel("Level 2");
-                gameModel.setQuestion("В каком году расспался СССР?");
-                gameModel.setFirstVariant("1992");
-                gameModel.setSecondVariant("1989");
-                gameModel.setThirdVariant("1991");
-                gameModel.setFourthVariant("1993");
-                gameModel.setAnswer("1991");
-                Intent intent = new Intent(LevelActivity.this,GameActivity.class);
-                intent.putExtra("KEY", gameModel);
-                startActivity(intent);
-            }
-        });
-        findViewById(R.id.third_level).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameModel gameModel = new GameModel();
-                gameModel.setCurrentLevel("Level 3");
-                gameModel.setQuestion("В каком году марлийцы отправили 4 детей на операцию на острове Парадиз?");
-                gameModel.setFirstVariant("829");
-                gameModel.setSecondVariant("838");
-                gameModel.setThirdVariant("859");
-                gameModel.setFourthVariant("845");
-                gameModel.setAnswer("845");
-                Intent intent = new Intent(LevelActivity.this,GameActivity.class);
-                intent.putExtra("KEY", gameModel);
-                startActivity(intent);
-            }
-        });
-        findViewById(R.id.fourth_level).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                GameModel gameModel = new GameModel();
-                gameModel.setCurrentLevel("Level 4");
-                gameModel.setQuestion("Что изучает пунктуация?");
-                gameModel.setFirstVariant("словосочетания и предложения");
-                gameModel.setSecondVariant("Знаки препинания");
-                gameModel.setThirdVariant("Части речи");
-                gameModel.setFourthVariant("Правило написания слов");
-                gameModel.setAnswer("Знаки препинания");
-                Intent intent = new Intent(LevelActivity.this,GameActivity.class);
-                intent.putExtra("KEY", gameModel);
+                intent.putExtra("position",position);
+                intent.putExtra("KEY",gameModel);
                 startActivity(intent);
             }
         });
     }
+
 }
